@@ -3,7 +3,7 @@ namespace GenericsTask
 
     public class SpecialQ<T> where T : class, new()
     {
-        private readonly T?[] elements; // Notice the nullable reference type declaration
+        private readonly T?[] elements;
         private int head;
         private int tail;
         private const int capacity = 10;
