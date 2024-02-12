@@ -2,12 +2,13 @@ namespace GenericsTask
 {
     public class SpecialStackk<T> where T : struct
     {
-        private readonly T[] elements;
+        private T[] elements;
         private int size;
-        private const int capacity = 10;
+        private int capacity;
 
-        public SpecialStackk()
+        public SpecialStackk(int initialCapacity = 10)
         {
+            capacity = initialCapacity;
             elements = new T[capacity];
         }
 
@@ -15,7 +16,7 @@ namespace GenericsTask
         {
             if (size == capacity)
             {
-                throw new InvalidOperationException("Stack is full.");
+                Resize();
             }
 
             elements[size++] = item;
@@ -41,6 +42,15 @@ namespace GenericsTask
         public bool IsEmpty()
         {
             return size == 0;
+        }
+
+        private void Resize()
+        {
+            int newCapacity = capacity * 2;
+            T[] newElements = new T[newCapacity];
+            Array.Copy(elements, newElements, size);
+            capacity = newCapacity;
+            elements = newElements;
         }
     }
 }
